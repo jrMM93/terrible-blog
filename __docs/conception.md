@@ -40,9 +40,9 @@ _Logical Data Model_.
 
 ```js
 User (CodeUser, Email, Firstname, Lastname, Password)
-Category ( CodeCategory, Route, Label )
-Article ( CodeArticle, Category, Slug, Title, Excerpt, Content, #CodeUser, #CodeCategory )
-BELONGS_TO ( CodeCategory, CodeArticle )
+Category ( CodeCategory, Route, Label)
+Article ( CodeArticle, Category, Slug, Title, Excerpt, Content, #CodeUser, #CodeCategory, created_at TIMESTAMPTZ, updated_at TIMESTAMPTZ)
+BELONGS_TO ( CodeCategory, CodeArticle)
 WRITES (CodeUser, CodeArticle)
 ```
 
