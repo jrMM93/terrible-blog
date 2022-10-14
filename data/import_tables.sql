@@ -1,6 +1,16 @@
 
 BEGIN;
 
+-- Create function to add current timestamp on article update automaticaly
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+      NEW.updated_at = now(); 
+      RETURN NEW;
+END;
+$$ language 'plpgsql';
+COMMIT;
+
 -- Clear tables, domains
 DROP TABLE IF EXISTS "user", 
 "category", 
@@ -50,8 +60,12 @@ CREATE TABLE IF NOT EXISTS "article" (
     "category_id" INTEGER NOT NULL REFERENCES "category"("id"),
     "user_id" INTEGER NOT NULL REFERENCES "user"("user_id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMPTZ
+    "updated_at" TIMESTAMPTZ 
 );
+
+-- Trigger for the updated_at function created earlier
+CREATE TRIGGER article_timestamp BEFORE UPDATE ON article
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
 
 -- Seeding
 INSERT INTO "user" ("email", "firstname", "lastname", "password")
