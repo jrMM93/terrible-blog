@@ -1,14 +1,18 @@
-//~ IMPORTATION ROUTER
+// IMPORT ROUTER
 import { Router } from 'express'
 const router = Router()
 
-//~ ROUTER MAIN
+// ROUTER MAIN
 router.get('/api/v1', (_req, res) => {
   res.json('Welcome to the worst blog API Humankind has ever seen')
 })
 
-//~ IMPORTATION ARTICLE ROUTER
+// IMPORT ARTICLE ROUTER
 import { router as articleRouter } from './article.js'
 router.use('/', articleRouter)
+
+// IMPORT CATEGORY ROUTER
+import { router as categoryRouter } from './category.js'
+router.use('/', categoryRouter)
 
 export { router }

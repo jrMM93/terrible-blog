@@ -1,4 +1,5 @@
 import { Router } from 'express'
+const router = Router()
 import {
   createArticle,
   fetchAllArticles,
@@ -6,7 +7,6 @@ import {
   updateArticle,
   deleteArticle,
 } from '../controllers/articleController.js'
-const router = Router()
 
 router.get('/api/v1/posts', fetchAllArticles)
 
