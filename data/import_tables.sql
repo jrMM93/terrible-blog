@@ -36,7 +36,7 @@ CREATE DOMAIN "password" AS text
 -- Create user table
 CREATE TABLE IF NOT EXISTS "user" (
   "user_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "email" email NOT NULL,
+  "email" email NOT NULL UNIQUE,
   "firstname"  TEXT NOT NULL,
   "lastname"  TEXT NOT NULL,
   "password"  password NOT NULL
