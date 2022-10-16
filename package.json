@@ -23,9 +23,11 @@
   "homepage": "https://github.com/jrMM93/terrible-blog#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0"
   },
   "devDependencies": {

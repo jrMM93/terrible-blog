@@ -1,5 +1,5 @@
 function _400(req, res) {
-  res.status(400).json('Mauvaise requête')
+  res.status(400).json('Bad Request')
 }
 
 function _404(req, res) {

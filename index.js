@@ -7,6 +7,10 @@ const app = express()
 
 import { router } from './app/routes/index.js'
 
+//-- Cookie-parser
+import cookieParser from 'cookie-parser'
+app.use(cookieParser())
+
 //-- Security
 import helmet from 'helmet'
 import { _404 } from './app/controllers/errorController.js'
