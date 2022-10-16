@@ -15,8 +15,8 @@ class Article {
     return findOne(articleId)
   }
 
-  static async createArticle(articleData) {
-    return createData(articleData)
+  static async createArticle(articleData, userId) {
+    return createData(articleData, userId)
   }
 
   static async updateArticle(articleId, articleData) {

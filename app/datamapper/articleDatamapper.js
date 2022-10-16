@@ -20,9 +20,8 @@ async function findOne(articleId) {
 }
 
 //------------------------------------------------------------------- CREATE
-async function createData(articleData) {
-  let { category, slug, title, excerpt, content, category_id, user_id } =
-    articleData
+async function createData(articleData, userId) {
+  let { category, slug, title, excerpt, content, category_id } = articleData
 
   const sql = {
     text: `
@@ -30,7 +29,7 @@ async function createData(articleData) {
             ("category", "slug", "title", "excerpt", "content", "category_id", "user_id")
         VALUES
             ($1,$2,$3,$4,$5,$6,$7);`,
-    values: [category, slug, title, excerpt, content, category_id, user_id],
+    values: [category, slug, title, excerpt, content, category_id, userId],
   }
 
   const result = await client.query(sql)

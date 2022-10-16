@@ -1,5 +1,5 @@
 import { User } from '../models/user.js'
-import { _400, _500 } from './errorController.js'
+import { _400 } from './errorController.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -19,10 +19,11 @@ async function login(req, res) {
     }
 
     const verifiedPass = await bcrypt.compare(password, user.password)
+    // console.log('user :', user)
 
     if (user && verifiedPass) {
       const token = jwt.sign(
-        { userId: user.id, userEmail: user.email },
+        { userId: user.user_id, userEmail: user.email },
         process.env.TOKEN_KEY,
         { expiresIn: '6h' }
       )

@@ -30,7 +30,7 @@ async function fetchOneArticle(req, res) {
 //------------------------------------------------------------- CREATE
 async function createArticle(req, res) {
   try {
-    await Article.createArticle(req.body)
+    await Article.createArticle(req.body, req.userId)
 
     return res.status(200).json(`Your post has been successfully created`)
   } catch (err) {
@@ -42,9 +42,12 @@ async function createArticle(req, res) {
 async function updateArticle(req, res) {
   try {
     const articleId = +req.params.id
-    console.log(req.params, req.body)
 
     let articleInfo = await Article.findOneArticle(articleId)
+
+    if (!(articleInfo.user_id === +req.userId)) {
+      return res.status(403).json('Unauthorized')
+    }
 
     for (const key in articleInfo) {
       req.body[key] ? req.body[key] : (req.body[key] = articleInfo[key])

@@ -7,7 +7,7 @@ const authorization = (req, res, next) => {
   }
   try {
     const data = jwt.verify(token, process.env.TOKEN_KEY)
-    req.userId = data.id
+    req.userId = data.userId
     return next()
   } catch {
     return res.sendStatus(403)
