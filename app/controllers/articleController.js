@@ -65,6 +65,12 @@ async function updateArticle(req, res) {
 async function deleteArticle(req, res) {
   try {
     const articleId = +req.params.id
+
+    let articleInfo = await Article.findOneArticle(articleId)
+
+    if (!(articleInfo.user_id === +req.userId)) {
+      return res.status(403).json('Unauthorized')
+    }
     await Article.deleteArticle(articleId)
 
     return res.status(200).json(`Post successfully deleted`)
