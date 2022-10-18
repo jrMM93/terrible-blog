@@ -7,7 +7,7 @@ async function fetchAllArticles(req, res) {
     const articles = await Article.findAllArticles()
 
     if (articles) res.status(200).json(articles)
-    else throw new Error(`This post doesn't exist`)
+    else throw new Error(`No posts were found`)
   } catch (err) {
     _500(err, req, res)
   }
@@ -21,7 +21,7 @@ async function fetchOneArticle(req, res) {
     const article = await Article.findOneArticle(articleId)
 
     if (article) res.status(200).json(article)
-    else throw new Error(`L'article n'existe pas`)
+    else throw new Error(`This post doesn't exist`)
   } catch (err) {
     _500(err, req, res)
   }
