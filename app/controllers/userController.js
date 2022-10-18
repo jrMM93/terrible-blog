@@ -23,6 +23,19 @@ async function createUser(req, res) {
   }
 }
 
+//------------------------------------------------------------- FETCH ARTICLES BY CATEGORY ID
+async function fetchArticlesByUserId(req, res) {
+  try {
+    const userId = +req.params.id
+
+    const articles = await User.findArticlesByUser(userId)
+
+    res.json(articles)
+  } catch (err) {
+    _500(err, res, res)
+  }
+}
+
 // TODO: maybe add more methods later
 
-export { createUser }
+export { createUser, fetchArticlesByUserId }

@@ -1,6 +1,7 @@
 import { client } from '../services/database.js'
 
 const TABLE_NAME = 'user'
+const TABLE_ARTICLE = 'article'
 
 //------------------------------------------------------------------- CREATE USER
 async function createData(firstName, lastName, email, hashedPassword) {
@@ -14,6 +15,7 @@ async function createData(firstName, lastName, email, hashedPassword) {
   return result.rows[0]
 }
 
+//------------------------------------------------------------------- FIND USER BY EMAIL
 async function findByEmail(email) {
   const sql = {
     text: `SELECT * FROM "${TABLE_NAME}" WHERE "email" = $1`,
@@ -28,4 +30,13 @@ async function findByEmail(email) {
   return result.rows[0]
 }
 
-export { createData, findByEmail }
+//------------------------------------------------------------------- FIND ARTICLES BY CATEGORY ID
+async function findArticlesByUserId(userId) {
+  const result = await client.query(
+    `SELECT * FROM "${TABLE_ARTICLE}" WHERE "user_id" = $1;`,
+    [userId]
+  )
+  return result.rows
+}
+
+export { createData, findByEmail, findArticlesByUserId }
